@@ -15,4 +15,4 @@ This repository stores the oracle node code (so far centralized). An oracle node
   2. Download ton-link-node ``` git clone https://github.com/ton-link/ton-link-node.git ```
   3. Start ```./install```
   4. Create .env file
-  5. Start ton-link-node ```./tonlink```
+  5. Start ton-link-node ```./tonlink mainnet/testnet```
