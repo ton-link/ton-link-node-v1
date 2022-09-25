@@ -90,10 +90,18 @@ async function main(net) {
         console.log(clc.green('INFO'), ` [${await getTime()}]`,  'Starting ton-link node...');
         console.log(clc.green('INFO'), ` [${await getTime()}]`,  'Starting API...');
         console.log(clc.yellow('CHECK'), `[${await getTime()}]`, 'Connect to TONCENTER =',clc.green((await tonweb.provider.getWalletInfo(walletAddress.toString(true, true, true))).wallet));
-        console.log(clc.yellow('CHECK'), `[${await getTime()}]`, 'Connect to TONAPI =',clc.green((await (await fetch(`https://testnet.tonapi.io/v1/blockchain/getAccount?account=${walletAddress.toString(true, true, true)}`)).json()).status));
+        if (net=='testnet') {
+		console.log(clc.yellow('CHECK'), `[${await getTime()}]`, 'Connect to TONAPI =',clc.green((await (await fetch(`https://testnet.tonapi.io/v1/blockchain/getAccount?account=${walletAddress.toString(true, true, true)}`)).json()).status));
+	} else {
+		console.log(clc.yellow('CHECK'), `[${await getTime()}]`, 'Connect to TONAPI =',clc.green((await (await fetch(`https://tonapi.io/v1/blockchain/getAccount?account=${walletAddress.toString(true, true, true)}`)).json()).status));
+	}
 	console.log(clc.green('INFO'), ` [${await getTime()}]`, 'Usint wallet =', clc.green(walletAddress.toString(true, true, true)));
         console.log(clc.green('INFO'), ` [${await getTime()}]`, 'Using ton-link oracle =', clc.green((process.env).ORACLEADDRESS));
-        console.log(clc.yellow('CHECK'), `[${await getTime()}]`, 'Check ton-link oracle =',clc.green((await (await fetch(`https://testnet.tonapi.io/v1/blockchain/getAccount?account=${(process.env).ORACLEADDRESS}`)).json()).status));
+	if (net=='testnet') {
+		console.log(clc.yellow('CHECK'), `[${await getTime()}]`, 'Check ton-link oracle =',clc.green((await (await fetch(`https://testnet.tonapi.io/v1/blockchain/getAccount?account=${(process.env).ORACLEADDRESS}`)).json()).status));
+	} else {
+		console.log(clc.yellow('CHECK'), `[${await getTime()}]`, 'Check ton-link oracle =',clc.green((await (await fetch(`https://tonapi.io/v1/blockchain/getAccount?account=${(process.env).ORACLEADDRESS}`)).json()).status));
+	}
         console.log(clc.green('INFO'), ` [${await getTime()}]`, '---------------------------------------------------------------------------------------------------------------------------------------------------------')
 
         app.get('/v1/update', async function(req, res){
